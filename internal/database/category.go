@@ -1,8 +1,10 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 
+	"github.com/ArthurDotSaito/gRPC-go/internal/pb"
 	"github.com/google/uuid"
 )
 
@@ -55,4 +57,23 @@ func (c *Category) FindByCourseID(courseID string) (Category, error) {
 		return Category{}, err
 	}
 	return Category{db: c.db, ID: id, Name: name, Description: description}, nil
+}
+
+func (c *Category) ListCategories(ctx context.Context, in *pb.Empty) (*pb.CategoryListResponse, error) {
+	categories, err := c.FindAll()
+	if err != nil {
+		return nil, err
+	}
+
+	var categoryResponses []*pb.Category
+	
+	for _, category := range categories {
+		categoryResponses = append(categoryResponses, &pb.Category{
+			Id: category.ID,
+			Name: category.Name,
+			Description: category.Description,
+		})
+	}
+
+	return &pb.CategoryListResponse{Categories: categoryResponses}, nil
 }
