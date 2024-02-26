@@ -1,15 +1,18 @@
 package main
 
-import {
+import (
 	"database/sql"
 	"net"
 
-	"github.com/ta04/course-service/internal/database"
-	"github.com/ta04/course-service/internal/pb"
-	"github.com/ta04/course-service/internal/service"
+	"github.com/ArthurDotSaito/gRPC-go/internal/database"
+	"github.com/ArthurDotSaito/gRPC-go/internal/pb"
+	"github.com/ArthurDotSaito/gRPC-go/internal/service"
+
+	_ "github.com/mattn/go-sqlite3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-}
+)
+
 
 func main(){
 	db,err := sql.Open("sqlite3", "./db.sqlite")

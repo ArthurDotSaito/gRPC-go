@@ -1,19 +1,20 @@
 package service
 
-import{
-	"github.com/ta04/course-service/internal/database"
-	"github.com/ta04/course-service/internal/pb"
+import (
+	"context"
 
-}
+	"github.com/ArthurDotSaito/gRPC-go/internal/database"
+	"github.com/ArthurDotSaito/gRPC-go/internal/pb"
+)
 
 type CategoryService struct {
 	pb.UnimplementedCategoryServiceServer
 	CategoryDB database.Category
 }
 
-func NewCategoryServuice(categoryDB database.Category) *CategoryService {
+func NewCategoryService(categoryDB database.Category) *CategoryService {
 	return &CategoryService{
-		CategoryDB: categoryDB
+		CategoryDB: categoryDB,
 	}
 }
 
