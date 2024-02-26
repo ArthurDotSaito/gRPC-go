@@ -24,7 +24,12 @@ message CategoryListResponse{
     repeated Category categories = 1;
 }
 
+message CategoryGetRequest{
+    string id = 1;
+}
+
 service CategoryService{
     rpc CreateCategory(CreateCategoryRequest) returns (Category) {}
     rpc ListCategories(Empty) returns (CategoryListResponse) {}
+    rpc GetCategory(CategoryGetRequest) returns (Category) {}
 }
