@@ -18,7 +18,7 @@ func NewCategoryService(categoryDB database.Category) *CategoryService {
 	}
 }
 
-func (c *CategoryService) CreateCategory(cxt context.Context, aNewCategory *pb.CreateCategoryRequest) (*pb.CategoryRespose, error) {
+func (c *CategoryService) CreateCategory(cxt context.Context, aNewCategory *pb.CreateCategoryRequest) (*pb.Category, error) {
 	category, err := c.CategoryDB.Create(aNewCategory.Name, aNewCategory.Description)
 	if err != nil {
 		return nil, err
@@ -30,5 +30,5 @@ func (c *CategoryService) CreateCategory(cxt context.Context, aNewCategory *pb.C
 
 	}
 
-	return &pb.CategoryRespose{Category: categoryResponse}, nil
+	return categoryResponse, nil
 }
